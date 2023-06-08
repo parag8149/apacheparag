@@ -1,0 +1,20 @@
+---
+- name: Add Firewall Rules
+  
+  firewalld:
+          port: 80/tcp
+          permanent: true
+          state: enabled
+          
+- name: Reload Firewall Conf For New Rules
+  
+  systemd:
+          name: firewalld
+          state: reloaded
+          
+- name: Copy Indec File To Apache Directory
+  
+  copy:
+          src: files/index.html
+          dest: /var/www/html/
+...
